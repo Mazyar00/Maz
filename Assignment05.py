@@ -1,3 +1,4 @@
+
 # ------------------------------------------------------------------------ #
 # Title: Assignment 05
 # Description: Working with Dictionaries and Files
@@ -12,13 +13,20 @@
 
 # -- Data -- #
 # declare variables and constants
-strFile = "C:\\Users\\mazya\\Documents\\UW\\Python\\Module05\\Assignment05\\ToDoList.txt"  # Data Storage File
+strFile = "ToDoList.txt"  # Data Storage File
 strData = ""  # A row of text data from the file
+lstRow = []
 lstData = [] #A list of text data from the file
 dicRow = {}  # A row of data separated into elements of a dictionary {Task,Priority}
 lstTable = []  # A dictionary that acts as a 'table' of rows
 strMenu = ""  # A menu of user options
 strChoice = ""  # A Capture the user option selection
+# Process the data
+objFile = open(strFile, "r")
+for row in objFile:
+    lstRow = row.split(",")
+    print(lstRow[0] + ',' + lstRow[1].strip())
+objFile.close()
 
 # -- Processing -- #
 # Step 1 - When the program starts, load the any data you have
@@ -34,9 +42,9 @@ while (True):
     2) Add a new item.
     3) Remove an existing item.
     4) Save Data to File
-    5) Exit Program
+    5) Print and Exit Program
     """)
-    strFile = "C:\\Users\\mazya\\Documents\\UW\\Python\\Module05\\Assignment05\\ToDoList.txt"
+    strFile = "ToDoList.txt"
     strChoice = str(input("Which option would you like to perform? [1 to 5] - "))
     print()  # adding a new line for looks
     # Step 3 - Show the current items in the table
@@ -63,13 +71,18 @@ while (True):
         continue
     # Step 6 - Save tasks to the ToDoToDoList.txt file
     elif (strChoice.strip() == '4'):
-        objFile = open(strFile, "w")
+        objFile = open(strFile, "a")
         for row in lstTable:
-            objFile.write(row[0] + ',' + row[1] + "\n")
+            objFile.write("\n"+ row[0] + ',' + row[1].strip())
         objFile.close()
         print("Data Saved!")
         continue
     # Step 7 - Exit program
     elif (strChoice.strip() == '5'):
-        print("The End")
+        objFile = open(strFile, "r")
+        for row in objFile:
+            lstRow = row.split(",")
+            print(lstRow[0] + '|' + lstRow[1].strip())
+        objFile.close()
+        print("\n" + "The End")
         break  # and Exit the program
