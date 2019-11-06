@@ -1,4 +1,3 @@
-
 # ------------------------------------------------------------------------ #
 # Title: Assignment 05
 # Description: Working with Dictionaries and Files
